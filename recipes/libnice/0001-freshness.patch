@@ -1,0 +1,31 @@
+From 8ad450ffff65799af3259d070a07405b847650b4 Mon Sep 17 00:00:00 2001
+From: Tom Gilbert <twcgilbert@gmail.com>
+Date: Thu, 9 Jul 2020 17:55:08 +0530
+Subject: [PATCH] agent - enable consent freshness
+
+---
+ agent/agent.c | 36 ------------------------------------
+ 1 file changed, 1 insertion(+)
+ 
+diff --git a/agent/agent.c b/agent/agent.c
+index f779d8d..b934000 100644
+--- a/agent/agent.c
++++ b/agent/agent.c
+@@ -912,7 +912,7 @@ nice_agent_class_init (NiceAgentClass *klass)
+         "consent-freshness",
+         "Consent Freshness",
+         "Whether to perform the consent freshness checks as specified in RFC 7675",
+-        FALSE,
++        TRUE,
+         G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
+ 
+   /* install signals */
+@@ -1339,7 +1339,7 @@ nice_agent_new_full (GMainContext *ctx,
+       "full-mode", (flags & NICE_AGENT_OPTION_LITE_MODE) ? FALSE : TRUE,
+       "ice-trickle", (flags & NICE_AGENT_OPTION_ICE_TRICKLE) ? TRUE : FALSE,
+       "support-renomination", (flags & NICE_AGENT_OPTION_SUPPORT_RENOMINATION) ? TRUE : FALSE,
+-      "consent-freshness", (flags & NICE_AGENT_OPTION_CONSENT_FRESHNESS) ? TRUE : FALSE,
++      "consent-freshness", TRUE,
+       NULL);
+ 
+   return agent;

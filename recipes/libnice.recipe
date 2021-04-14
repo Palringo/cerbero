@@ -3,11 +3,11 @@ from cerbero.tools.libtool import LibtoolLibrary
 
 class Recipe(recipe.Recipe):
     name = 'libnice'
-    version = '0.1.17'
-    stype = SourceType.TARBALL
+    version = '0.1.19'
+    stype = SourceType.GIT
     btype = BuildType.MESON
-    url = 'https://nice.freedesktop.org/releases/%(name)s-%(version)s.tar.gz'
-    tarball_checksum = '1952a0dec58b5c9ccc3f25193df4e2d1244cb382cac611b71e25afcd7b069526'
+    remotes = {'origin': 'https://gitlab.com/libnice/libnice.git'}
+    commit = '39cd634a3c1dd8bbf3078eeef609b47656358fab'
     # Either LGPL-2.1+ or MPL-1.1
     licenses = [License.LGPLv2_1Plus, License.MPLv1_1]
     meson_options = {'tests' : 'disabled',
@@ -15,19 +15,8 @@ class Recipe(recipe.Recipe):
                      'gstreamer' : 'enabled',
                      'crypto-library' : 'openssl'}
     deps = ['glib', 'gstreamer-1.0']
-
-    patches = [
-        # https://gitlab.freedesktop.org/libnice/libnice/-/merge_requests/150
-        'libnice/0001-stund-Use-lowercase-winsock2.h.patch',
-        # https://gitlab.freedesktop.org/libnice/libnice/-/merge_requests/151
-        'libnice/0001-rand-Use-crypto-libs-instead-of-CryptGenRandom.patch',
-        'libnice/0002-meson-Fix-typos-in-crypto-library-detection.patch',
-        # https://gitlab.freedesktop.org/libnice/libnice/-/merge_requests/154
-        'libnice/0001-interfaces-Add-debug-logging-to-sockaddr_to_string.patch',
-        'libnice/0002-interfaces-Port-to-GetBestInterfaceEx-for-UWP-compat.patch',
-        'libnice/0003-interfaces-Remove-unused-win32-code.patch',
-        'libnice/0004-interfaces-Fix-fetching-of-interfaces-on-Win32.patch',
-    ]
+    
+    patches = ['libnice/0001-freshness.patch']
 
     files_bins = ['stunbdc', 'stund']
     files_libs = ['libnice']
