@@ -15,8 +15,6 @@ class Recipe(recipe.Recipe):
                      'gstreamer' : 'enabled',
                      'crypto-library' : 'openssl'}
     deps = ['glib', 'gstreamer-1.0']
-    
-    patches = ['libnice/0001-freshness.patch']
 
     files_bins = ['stunbdc', 'stund']
     files_libs = ['libnice']
